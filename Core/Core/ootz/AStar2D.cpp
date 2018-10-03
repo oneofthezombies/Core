@@ -199,10 +199,10 @@ std::vector<Vector2> AStar2D::GetPath(const StreamGrid2D& graph, const Vector2& 
             // new path
             const float newCost = costSoFar[current] + graph.GetCost(current, next);
 
-            const auto found = costSoFar.find(next);
+            const bool isFound = costSoFar.find(next) != costSoFar.end();
 
             // if first visit or new path is better, write(overwrite) it.
-            if (found == costSoFar.end() || newCost < costSoFar[next])
+            if ( ! isFound || newCost < costSoFar[next])
             {
                 costSoFar[next] = newCost;
 
@@ -217,11 +217,9 @@ std::vector<Vector2> AStar2D::GetPath(const StreamGrid2D& graph, const Vector2& 
     }
 
     // if the goal is not reached, return empty vector.
-    const auto found = cameFrom.find(goal);
-    if (found == cameFrom.end())
-    {
+    const bool isFound = cameFrom.find(goal) != cameFrom.end();
+    if ( ! isFound)
         return std::vector<Vector2>();
-    }
 
     // else, construct path.
     return ConstructPath_(cameFrom, start, goal);
