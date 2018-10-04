@@ -22,10 +22,10 @@ Grid2D::~Grid2D()
 Attribute& Grid2D::AccessAttribute_(const std::size_t x, const std::size_t y)
 {
     const bool isOutOfRangeRow = IsOutOfRange(grid_, y);
-    assert(!isOutOfRangeRow && "y is out of range.");
+    assert( ! isOutOfRangeRow && "y is out of range.");
 
     const bool isOutOfRangeCol = IsOutOfRange(grid_.front(), x);
-    assert(!isOutOfRangeCol && "x is out of range.");
+    assert( ! isOutOfRangeCol && "x is out of range.");
 
     const std::size_t row = (grid_.size() - 1) - y;
 
@@ -173,7 +173,9 @@ AStar2D::~AStar2D()
 {
 }
 
-std::vector<Vector2> AStar2D::GetPath(const StreamGrid2D& graph, const Vector2& start, const Vector2& goal)
+std::vector<Vector2> AStar2D::GetPath(const StreamGrid2D& graph, 
+                                      const Vector2& start, 
+                                      const Vector2& goal)
 {
     PriorityQueue frontier;
 
@@ -185,10 +187,10 @@ std::vector<Vector2> AStar2D::GetPath(const StreamGrid2D& graph, const Vector2& 
     frontier.Push(start, 0.0f);
     costSoFar[start] = 0.0f;
 
-    while (!frontier.IsEmpty())
+    while ( ! frontier.IsEmpty())
     {
         // get smallest cost node.
-        Vector2 current = frontier.Pop().value;
+        const Vector2 current = frontier.Pop().value;
 
         // if you reached to goal, construct path.
         if (IsEqual(current, goal))
