@@ -13,14 +13,14 @@ namespace Math
 // coefficients of the plane equation, ax + by + cz + d = 0
 struct Plane
 {
-    // attributes
+    /* attributes */
 
     float a;
     float b;
     float c;
     float d;
 
-    // constructors
+    /* constructors */
 
     // constructor of plane
     // coefficients of the plane equation, ax + by + cz + d = 0
@@ -35,12 +35,12 @@ struct Plane
     // the normal of this plane is calculated clockwise from p0, p1 and p2
     Plane(const Vector3& p0, const Vector3& p1, const Vector3& p2);
 
-    // public methods
+    /* public methods */
 
+    // calculate signed distance between this plane and the point
     float DistanceFromPoint(const Vector3& point);
 
-    // private methods
-
+    /* private methods */
 private:
 
     // D is coefficient of the plane equation, ax + by + cz + d = 0
