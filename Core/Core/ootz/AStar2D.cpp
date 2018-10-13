@@ -1,11 +1,11 @@
 #include "stdafx.h"
-#include "AStar2D.hpp"
+#include "AStar2D.h"
 
 /* assert() */
 #include <cassert>
 
 /* ootz::IsOutOfRange() */
-#include "Utility.hpp"
+#include "Utility.h"
 
 namespace ootz
 {

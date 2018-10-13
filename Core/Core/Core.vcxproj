@@ -90,7 +90,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\hunho\source\boost\boost_1_68_0;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Users\hunho\source\boost\boost_1_68_0;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -105,7 +105,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\hunho\source\boost\boost_1_68_0;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Users\hunho\source\boost\boost_1_68_0;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -122,7 +122,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\hunho\source\boost\boost_1_68_0;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Users\hunho\source\boost\boost_1_68_0;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,7 +141,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\hunho\source\boost\boost_1_68_0;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;C:\Users\hunho\source\boost\boost_1_68_0;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,15 +151,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ootz\AStar2D.hpp" />
-    <ClInclude Include="ootz\Utility.hpp" />
-    <ClInclude Include="ootz\Vector2.hpp" />
+    <ClInclude Include="ootz\AStar2D.h" />
+    <ClInclude Include="ootz\Basic\Example.h" />
+    <ClInclude Include="ootz\DirectX9\Definition.h" />
+    <ClInclude Include="ootz\DirectX9\Shader.h" />
+    <ClInclude Include="ootz\Math\Math.h" />
+    <ClInclude Include="ootz\Math\Plane.h" />
+    <ClInclude Include="ootz\Math\Vector3.h" />
+    <ClInclude Include="ootz\Singleton.h" />
+    <ClInclude Include="ootz\Utility.h" />
+    <ClInclude Include="ootz\Vector2.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core.cpp" />
     <ClCompile Include="ootz\AStar2D.cpp" />
+    <ClCompile Include="ootz\Basic\Example.cpp" />
+    <ClCompile Include="ootz\DirectX9\Shader.cpp" />
+    <ClCompile Include="ootz\Math\Math.cpp" />
+    <ClCompile Include="ootz\Math\Plane.cpp" />
+    <ClCompile Include="ootz\Math\Vector3.cpp" />
     <ClCompile Include="ootz\Utility.cpp" />
     <ClCompile Include="ootz\Vector2.cpp" />
     <ClCompile Include="stdafx.cpp">

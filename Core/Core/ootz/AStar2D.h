@@ -13,7 +13,7 @@
 #include <queue>
 
 /* ootz::Vector2 */
-#include "Vector2.hpp"
+#include "Vector2.h"
 
 namespace ootz
 {
@@ -36,7 +36,7 @@ private:
     Attribute& AccessAttribute_(const std::size_t x, const std::size_t y);
 
 public:
-    Grid2D(const std::size_t numX, const std::size_t numY);
+     Grid2D(const std::size_t numX, const std::size_t numY);
     ~Grid2D();
 
     void SetAttribute(const std::size_t x, const std::size_t y, const Attribute attribute);
