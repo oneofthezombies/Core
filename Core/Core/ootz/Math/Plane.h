@@ -38,13 +38,16 @@ struct Plane
     /* public methods */
 
     // calculate signed distance between this plane and the point
-    float DistanceFromPoint(const Vector3& point);
+    float DistanceFromPointSigned(const Vector3& point) const;
+
+    // calculate unsigned distance between this plane and the point
+    float DistanceFromPoint(const Vector3& point) const;
 
     /* private methods */
 private:
 
     // D is coefficient of the plane equation, ax + by + cz + d = 0
-    float CalculateCoefficientD(const Vector3& point, const Vector3& normal);
+    float CoefficientD(const Vector3& point, const Vector3& normal);
 };
 
 std::ostream& operator<<(std::ostream& ostream, const Plane& plane);

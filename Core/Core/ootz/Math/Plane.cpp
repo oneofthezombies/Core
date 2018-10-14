@@ -19,7 +19,7 @@ Plane::Plane(const Vector3& point, const Vector3& normal)
     : a(normal.x)
     , b(normal.y)
     , c(normal.z)
-    , d(CalculateCoefficientD(point, normal))
+    , d(CoefficientD(point, normal))
 {
 }
 
@@ -30,19 +30,22 @@ Plane::Plane(const Vector3& p0, const Vector3& p1, const Vector3& p2)
     a = normal.x;
     b = normal.y;
     c = normal.z;
-    d = CalculateCoefficientD(p0, normal);
+    d = CoefficientD(p0, normal);
 }
 
-float Plane::DistanceFromPoint(const Vector3& point)
+float Plane::DistanceFromPointSigned(const Vector3& point) const
 {
-    return Vector3(a, b, c).Normalize().Dot(point);
+    return (a * point.x + b * point.y + c * point.z + d) / Vector3(a, b, c).Length();
 }
 
-float Plane::CalculateCoefficientD(const Vector3& point, const Vector3& normal)
+float Plane::DistanceFromPoint(const Vector3& point) const
 {
-    return -(normal.x * point.x 
-           + normal.y * point.y
-           + normal.z * point.z);
+    return std::abs(DistanceFromPointSigned(point));
+}
+
+float Plane::CoefficientD(const Vector3& point, const Vector3& normal)
+{
+    return -(normal.x * point.x + normal.y * point.y + normal.z * point.z);
 }
 
 std::ostream& operator<<(std::ostream& ostream, const Plane& plane)

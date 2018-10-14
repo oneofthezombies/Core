@@ -27,12 +27,14 @@ struct Vector3
 
     /* public methods */
 
-    float Dot(const Vector3& other);
+    float Dot(const Vector3& other) const;
 
     // calculate cross production from this to other, this X other
-    Vector3 Cross(const Vector3& other);
+    Vector3 Cross(const Vector3& other) const;
 
-    Vector3 Normalize();
+    Vector3 Normalize() const;
+
+    float Length() const;
 
     /* operators */
 
