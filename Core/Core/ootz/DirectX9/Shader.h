@@ -1,6 +1,5 @@
 #pragma once
 
-#include "ootz/Singleton.h"
 #include "ootz/DirectX9/Definition.h"
 
 namespace ootz
@@ -8,6 +7,8 @@ namespace ootz
 
 namespace DirectX9
 {
+
+
 
 //struct Shader
 //{

@@ -10,6 +10,9 @@
 namespace ootz
 {
 
+namespace Math
+{
+
 Vector2::Vector2()
     : x(0.0f)
     , y(0.0f)
@@ -68,7 +71,7 @@ bool operator==(const Vector2& lhs, const Vector2& rhs)
 
 bool operator!=(const Vector2& lhs, const Vector2& rhs)
 {
-    return ! (lhs == rhs);
+    return !(lhs == rhs);
 }
 
 Vector2 operator+(const Vector2& lhs, const Vector2& rhs)
@@ -119,13 +122,15 @@ bool IsEqual(const Vector2& lhs, const Vector2& rhs, const float epsilon)
         && std::abs(lhs.y - rhs.y) < epsilon;
 }
 
-std::size_t Vector2::Hash::operator()(const Vector2 & key) const
+size_t Vector2::Hash::operator()(const Vector2& key) const
 {
-    std::size_t seed = 0;
+    size_t seed = 0;
     boost::hash_combine(seed, key.x);
     boost::hash_combine(seed, key.y);
 
     return seed;
 }
+
+} // namespace Math
 
 } // namespace ootz

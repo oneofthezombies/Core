@@ -1,5 +1,6 @@
 #pragma once
 
+/* std::ostream */
 #include <ostream>
 
 namespace ootz
@@ -54,6 +55,12 @@ struct Vector3
     static float Length(const Vector3& vector3);
 
     static float LengthSq(const Vector3& vector3);
+
+    /* hasher for unordered associative containers */
+    struct Hash
+    {
+        size_t operator()(const Vector3& key) const;
+    };
 };
 
 /* global operators */

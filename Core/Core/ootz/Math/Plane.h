@@ -1,7 +1,9 @@
 #pragma once
 
+/* std::ostream */
 #include <ostream>
 
+/* ootz::Math::Vector3 */
 #include "Vector3.h"
 
 namespace ootz

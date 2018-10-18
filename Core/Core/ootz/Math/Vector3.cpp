@@ -1,7 +1,11 @@
 #include "stdafx.h"
 #include "Vector3.h"
 
+/* assert() */
 #include <cassert>
+
+/* boost::hash_combine() */
+#include <boost/functional/hash.hpp>
 
 namespace ootz
 {
@@ -97,6 +101,15 @@ std::ostream& operator<<(std::ostream& ostream, const Vector3& vector3)
 {
     ostream << vector3.x << ' ' << vector3.y << ' ' << vector3.z;
     return ostream;
+}
+
+size_t Vector3::Hash::operator()(const Vector3& key) const
+{
+    size_t seed = 0;
+    boost::hash_combine(seed, key.x);
+    boost::hash_combine(seed, key.y);
+    boost::hash_combine(seed, key.z);
+    return seed;
 }
 
 } // namespace Math

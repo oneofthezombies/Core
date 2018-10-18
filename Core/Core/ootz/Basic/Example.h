@@ -1,6 +1,8 @@
 #pragma once
 
 #include <cstdint>
+#include <future>
+#include <iostream>
 
 namespace ootz
 {

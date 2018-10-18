@@ -21,13 +21,7 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ootz\Vector2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ootz\Utility.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ootz\Singleton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ootz\AStar2D.h">
@@ -51,15 +45,18 @@
     <ClInclude Include="ootz\Math\Plane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ootz\Math\Vector2.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ootz\Time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ootz\Vector2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ootz\Utility.cpp">
@@ -81,6 +78,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ootz\Math\Plane.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ootz\Math\Vector2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ootz\Time.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

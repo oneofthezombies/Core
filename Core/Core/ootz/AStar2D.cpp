@@ -10,6 +10,8 @@
 namespace ootz
 {
 
+using Vector2 = Math::Vector2;
+
 Grid2D::Grid2D(const std::size_t numX, const std::size_t numY)
     : grid_(numY, std::vector<Attribute>(numX, Attribute::Reachable))
 {

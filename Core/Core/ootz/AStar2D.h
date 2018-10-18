@@ -12,14 +12,14 @@
 /* std::priority_queue */
 #include <queue>
 
-/* ootz::Vector2 */
-#include "Vector2.h"
+/* ootz::Math::Vector2 */
+#include "ootz/Math/Vector2.h"
 
 namespace ootz
 {
 
 /* node's attribute in grid graph */
-enum class Attribute : std::uint8_t
+enum class Attribute : uint8_t
 {
     Reachable,
     Unreachable
@@ -52,11 +52,13 @@ public:
 */
 class StreamGrid2D
 {
+    using Vector2 = Math::Vector2;
+
 private:
     struct NodeInfo
     {
         Attribute            attribute;
-        std::vector<Vector2> neighbors;
+        std::vector<Math::Vector2> neighbors;
 
         NodeInfo();
     };
@@ -79,6 +81,8 @@ public:
 */
 class AStar2D
 {
+    using Vector2 = Math::Vector2;
+
 private:
     template<typename ValueType>
     using HashTable = std::unordered_map<Vector2, ValueType, Vector2::Hash>;

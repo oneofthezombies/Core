@@ -12,6 +12,9 @@
 namespace ootz
 {
 
+namespace Math
+{
+
 /*  Vector2 contains two float value
 */
 struct Vector2
@@ -23,8 +26,8 @@ struct Vector2
 
     /* constructors and destructors */
 
-     Vector2();
-     Vector2(const float x, const float y);
+    Vector2();
+    Vector2(const float x, const float y);
     ~Vector2();
 
     /* operators */
@@ -44,7 +47,7 @@ struct Vector2
     /* hasher for unordered associative containers */
     struct Hash
     {
-        std::size_t operator()(const Vector2& key) const;
+        size_t operator()(const Vector2& key) const;
     };
 };
 
@@ -64,5 +67,7 @@ Vector2 operator/(const float lhs, const Vector2& rhs);
 
 std::ostream& operator<<(std::ostream& ostream, const Vector2& value);
 bool IsEqual(const Vector2& lhs, const Vector2& rhs, const float epsilon = std::numeric_limits<float>::epsilon());
+
+} // namespace Math
 
 } // namespace ootz
