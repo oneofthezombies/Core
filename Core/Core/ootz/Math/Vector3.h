@@ -1,23 +1,19 @@
 #pragma once
 
-/* std::ostream */
-#include <ostream>
+#include "ootz/base.h"
 
 namespace ootz
 {
 
-namespace Math
-{
-
 struct Vector3
 {
-    /* attributes */
+    // attributes
 
     float x;
     float y;
     float z;
 
-    /* constructors */
+    // constructors and destructors
 
     // default constructor of the 3-dimentional vector
     // set the attributes to zero
@@ -26,7 +22,10 @@ struct Vector3
     // constructor of the 3-dimentional vector
     Vector3(const float x, const float y, const float z);
 
-    /* public methods */
+    // default destructor
+    ~Vector3();
+
+    // public methods
 
     float Dot(const Vector3& other) const;
 
@@ -37,13 +36,13 @@ struct Vector3
 
     float Length() const;
 
-    /* operators */
+    // operators
 
     friend Vector3 operator+(const Vector3& v0, const Vector3& v1);
     friend Vector3 operator-(const Vector3& v0, const Vector3& v1);
     friend Vector3 operator/(const Vector3& vector3, const float value);
 
-    /* static methods */
+    // static methods
 
     static float Dot(const Vector3& v0, const Vector3& v1);
 
@@ -56,23 +55,21 @@ struct Vector3
 
     static float LengthSq(const Vector3& vector3);
 
-    /* hasher for unordered associative containers */
+    // hasher for unordered associative containers
     struct Hash
     {
         size_t operator()(const Vector3& key) const;
     };
 };
 
-/* global operators */
+// global operators
 
 Vector3 operator+(const Vector3& v0, const Vector3& v1);
 Vector3 operator-(const Vector3& v0, const Vector3& v1);
 Vector3 operator/(const Vector3& vector3, const float value);
 
-/* helper functions */
+// helper functions
 
 std::ostream& operator<<(std::ostream& ostream, const Vector3& vector3);
-
-} // namespace Math
 
 } // namespace ootz

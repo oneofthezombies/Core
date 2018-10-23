@@ -1,7 +1,6 @@
 #pragma once
 
-#include <cstddef>
-#include <vector>
+#include "ootz/base.h"
 
 namespace ootz
 {

@@ -1,16 +1,10 @@
 #include "stdafx.h"
-#include "Vector2.h"
+#include "vector2.h"
 
-/* assert() */
-#include <cassert>
-
-/* boost::hash_combine() */
+// boost::hash_combine()
 #include <boost/functional/hash.hpp>
 
 namespace ootz
-{
-
-namespace Math
 {
 
 Vector2::Vector2()
@@ -130,7 +124,5 @@ size_t Vector2::Hash::operator()(const Vector2& key) const
 
     return seed;
 }
-
-} // namespace Math
 
 } // namespace ootz

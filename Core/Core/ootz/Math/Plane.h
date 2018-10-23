@@ -1,28 +1,22 @@
 #pragma once
 
-/* std::ostream */
-#include <ostream>
-
-/* ootz::Math::Vector3 */
-#include "Vector3.h"
+#include "ootz/base.h"
+#include "ootz/math/vector3.h"
 
 namespace ootz
-{
-
-namespace Math
 {
 
 // coefficients of the plane equation, ax + by + cz + d = 0
 struct Plane
 {
-    /* attributes */
+    // attributes
 
     float a;
     float b;
     float c;
     float d;
 
-    /* constructors */
+    // constructors
 
     // constructor of plane
     // coefficients of the plane equation, ax + by + cz + d = 0
@@ -37,7 +31,11 @@ struct Plane
     // the normal of this plane is calculated clockwise from p0, p1 and p2
     Plane(const Vector3& p0, const Vector3& p1, const Vector3& p2);
 
-    /* public methods */
+    // default destructor
+
+    ~Plane();
+
+    // public methods
 
     // calculate signed distance between this plane and the point
     float DistanceFromPointSigned(const Vector3& point) const;
@@ -45,15 +43,16 @@ struct Plane
     // calculate unsigned distance between this plane and the point
     float DistanceFromPoint(const Vector3& point) const;
 
-    /* private methods */
 private:
+
+    // private methods
 
     // D is coefficient of the plane equation, ax + by + cz + d = 0
     float CoefficientD(const Vector3& point, const Vector3& normal);
 };
 
-std::ostream& operator<<(std::ostream& ostream, const Plane& plane);
+// helper functions
 
-} // namespace Math
+std::ostream& operator<<(std::ostream& ostream, const Plane& plane);
 
 } // namespace ootz

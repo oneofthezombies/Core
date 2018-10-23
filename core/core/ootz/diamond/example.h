@@ -1,13 +1,11 @@
 #pragma once
 
-#include <cstdint>
-#include <future>
-#include <iostream>
+#include "ootz/base.h"
 
 namespace ootz
 {
 
-namespace Diamond
+namespace diamond
 {
 
 class CommuteTimeTable
@@ -35,6 +33,6 @@ public:
     static bool IsOnNthBit(const int data, const int n);
 };
 
-}
+} // namespace diamond
 
 } // namespace ootz

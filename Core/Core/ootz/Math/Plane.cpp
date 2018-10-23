@@ -1,10 +1,7 @@
 #include "stdafx.h"
-#include "Plane.h"
+#include "plane.h"
 
 namespace ootz
-{
-
-namespace Math
 {
 
 Plane::Plane(const float a, const float b, const float c, const float d)
@@ -33,6 +30,10 @@ Plane::Plane(const Vector3& p0, const Vector3& p1, const Vector3& p2)
     d = CoefficientD(p0, normal);
 }
 
+Plane::~Plane()
+{
+}
+
 float Plane::DistanceFromPointSigned(const Vector3& point) const
 {
     return (a * point.x + b * point.y + c * point.z + d) / Vector3(a, b, c).Length();
@@ -53,7 +54,5 @@ std::ostream& operator<<(std::ostream& ostream, const Plane& plane)
     ostream << plane.a << ' ' << plane.b << ' ' << plane.c << ' ' << plane.d;
     return ostream;
 }
-
-} // namespace Math
 
 } // namespace ootz

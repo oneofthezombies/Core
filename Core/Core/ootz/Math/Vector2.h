@@ -1,36 +1,25 @@
 #pragma once
 
-/* std::size_t */
-#include <cstddef>
-
-/* std::numeric_limits */
-#include <limits>
-
-/* std::ostream */
-#include <ostream>
+#include "ootz/base.h"
 
 namespace ootz
 {
 
-namespace Math
-{
-
-/*  Vector2 contains two float value
-*/
+// Vector2 contains two float value
 struct Vector2
 {
-    /* properties */
+    // attributes
 
     float x;
     float y;
 
-    /* constructors and destructors */
+    // constructors and destructors
 
     Vector2();
     Vector2(const float x, const float y);
     ~Vector2();
 
-    /* operators */
+    // operators
 
     Vector2& operator+=(const Vector2& other);
     Vector2& operator-=(const Vector2& other);
@@ -44,14 +33,14 @@ struct Vector2
     friend Vector2 operator/(const Vector2& lhs, const float rhs);
     friend Vector2 operator/(const float lhs, const Vector2& rhs);
 
-    /* hasher for unordered associative containers */
+    // hasher for unordered associative containers
     struct Hash
     {
         size_t operator()(const Vector2& key) const;
     };
 };
 
-/* operators */
+// global operators
 
 bool operator==(const Vector2& lhs, const Vector2& rhs);
 bool operator!=(const Vector2& lhs, const Vector2& rhs);
@@ -63,11 +52,9 @@ Vector2 operator*(const float lhs, const Vector2& rhs);
 Vector2 operator/(const Vector2& lhs, const float rhs);
 Vector2 operator/(const float lhs, const Vector2& rhs);
 
-/* utilities */
+// helper functions
 
 std::ostream& operator<<(std::ostream& ostream, const Vector2& value);
 bool IsEqual(const Vector2& lhs, const Vector2& rhs, const float epsilon = std::numeric_limits<float>::epsilon());
-
-} // namespace Math
 
 } // namespace ootz

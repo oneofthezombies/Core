@@ -21,34 +21,46 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ootz\Utility.h">
+    <ClInclude Include="ootz\a_star_2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ootz\AStar2D.h">
+    <ClInclude Include="ootz\diamond\example.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ootz\DirectX9\Shader.h">
+    <ClInclude Include="ootz\directx11\directx11.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ootz\DirectX9\Definition.h">
+    <ClInclude Include="ootz\data_structure\heap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ootz\Basic\Example.h">
+    <ClInclude Include="ootz\math\plane.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ootz\Math\Math.h">
+    <ClInclude Include="ootz\math\vector2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ootz\Math\Vector3.h">
+    <ClInclude Include="ootz\math\vector3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ootz\Math\Plane.h">
+    <ClInclude Include="ootz\directx9\definition.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ootz\Math\Vector2.h">
+    <ClInclude Include="ootz\directx9\shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ootz\Time.h">
+    <ClInclude Include="ootz\time.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ootz\utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ootz\base.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ootz\data_structure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ootz\math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -56,34 +68,31 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core.cpp">
+    <ClCompile Include="ootz\a_star_2d.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ootz\Utility.cpp">
+    <ClCompile Include="ootz\diamond\example.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ootz\AStar2D.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ootz\DirectX9\Shader.cpp">
+    <ClCompile Include="ootz\math\plane.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ootz\Basic\Example.cpp">
+    <ClCompile Include="ootz\math\vector2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ootz\Math\Math.cpp">
+    <ClCompile Include="ootz\math\vector3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ootz\Math\Vector3.cpp">
+    <ClCompile Include="ootz\directx9\shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ootz\Math\Plane.cpp">
+    <ClCompile Include="ootz\time.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ootz\Math\Vector2.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ootz\Time.cpp">
+    <ClCompile Include="ootz\utility.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,16 +1,10 @@
 #include "stdafx.h"
-#include "Vector3.h"
+#include "vector3.h"
 
-/* assert() */
-#include <cassert>
-
-/* boost::hash_combine() */
+// boost::hash_combine()
 #include <boost/functional/hash.hpp>
 
 namespace ootz
-{
-
-namespace Math
 {
 
 Vector3::Vector3()
@@ -24,6 +18,10 @@ Vector3::Vector3(const float x, const float y, const float z)
     : x(x)
     , y(y)
     , z(z)
+{
+}
+
+Vector3::~Vector3()
 {
 }
 
@@ -111,8 +109,6 @@ size_t Vector3::Hash::operator()(const Vector3& key) const
     boost::hash_combine(seed, key.z);
     return seed;
 }
-
-} // namespace Math
 
 } // namespace ootz
 

@@ -1,13 +1,10 @@
 #include "stdafx.h"
-#include "Example.h"
-
-#include <vector>
-#include <iostream>
+#include "example.h"
 
 namespace ootz
 {
 
-namespace Diamond
+namespace diamond
 {
 
 size_t CommuteTimeTable::GetNumCurrentEmployees(const size_t currentTime)
@@ -67,7 +64,7 @@ bool BitwiseManipulation::IsOnNthBit(const int data, const int n)
     return data & (1 << n);
 }
 
-} // namespace Diamond
+} // namespace diamond
 
 } // namespace ootz
 

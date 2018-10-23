@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "Shader.h"
+#include "shader.h"
 
 namespace ootz
 {
