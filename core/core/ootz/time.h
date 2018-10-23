@@ -1,79 +1,98 @@
 #pragma once
 
-#include <cassert>
 #include <chrono>
-#include <functional>
-#include <string>
+
+#include "ootz/base.h"
 
 namespace ootz
 {
 
-namespace Time
+namespace time
 {
 
-template<typename ClockType>
+std::string TimePointToString(const std::chrono::system_clock::time_point& timePoint)
+{
+    const time_t t = std::chrono::system_clock::to_time_t(timePoint);
+    std::string timeString(ctime(&t));
+    timeString.pop_back();
+    return timeString;
+}
+
+template<
+    typename T, 
+    typename = std::enable_if_t<
+        std::is_same_v<T, std::chrono::steady_clock> || 
+        std::is_same_v<T, std::chrono::system_clock>>>
 class ElapsedTimerBase
 {
 public:
-    float GetElapsedTime() const { return _elapsedTime; }
+    using clock_type = T;
+    using time_point_type = std::chrono::time_point<clock_type>;
+    using duration_type = std::chrono::duration<float>;
 
-protected:
-    using Clock = ClockType;
-    using TimePoint = std::chrono::time_point<ClockType>;
-    using Duration = std::chrono::duration<float>;
-
-    ElapsedTimerBase(const std::function<void()>& operation)
+    ElapsedTimerBase()
         : _startTime()
         , _finishTime()
-        , _elapsedTime(0.0f)
+        , _duration()
     {
-        _Start();
-        operation();
-        _Finish();
+        start();
     }
 
     ~ElapsedTimerBase() {}
 
-    void _Start()
+    constexpr void start()
     {
-        _startTime = Clock::now();
+        _startTime = clock_type::now();
+    }
+    
+    constexpr void finish()
+    {
+        _finishTime = clock_type::now();
+        _duration = _finishTime - _startTime;
     }
 
-    void _Finish()
-    {
-        _finishTime = Clock::now();
-        _elapsedTime = Duration(_finishTime - _startTime).count();
+    constexpr float getElapsedTime() const 
+    { 
+        return _duration.count(); 
     }
 
-    const TimePoint& _GetStartTime() const { return _startTime; }
-    const TimePoint& _GetFinishTime() const { return _finishTime; }
-
-private:
-    TimePoint _startTime;
-    TimePoint _finishTime;
-    float     _elapsedTime;
+protected:
+    time_point_type _startTime;
+    time_point_type _finishTime;
+    duration_type _duration;
 };
 
-class ElapsedTimer 
-    : public ElapsedTimerBase<std::chrono::steady_clock>
+class ElapsedTimer : public ElapsedTimerBase<std::chrono::steady_clock>
 {
 public:
-    ElapsedTimer(const std::function<void()>& operation);
+    ElapsedTimer()
+        : ElapsedTimerBase<std::chrono::steady_clock>()
+    {}
+
+    ~ElapsedTimer() {}
 };
 
 class SystemElapsedTimer 
     : public ElapsedTimerBase<std::chrono::system_clock>
 {
 public:
-    SystemElapsedTimer(const std::function<void()>& operation);
+    SystemElapsedTimer()
+        : ElapsedTimerBase<std::chrono::system_clock>()
+    {}
 
-    std::string GetStartTimeString();
-    std::string GetFinishTimeString();
+    ~SystemElapsedTimer() {}
 
-private:
-    std::string TimePointToString(const TimePoint& timePoint);
+    std::string getStartTime() const
+    {
+        return TimePointToString(_startTime);
+    }
+
+    std::string getFinishTime() const
+    {
+        return TimePointToString(_finishTime);
+    }
 };
 
-}
+} // namespace time
 
 } // namespace ootz

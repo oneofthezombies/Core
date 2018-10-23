@@ -4,6 +4,9 @@
 namespace ootz
 {
 
+namespace math
+{
+
 Plane::Plane(const float a, const float b, const float c, const float d)
     : a(a)
     , b(b)
@@ -54,5 +57,7 @@ std::ostream& operator<<(std::ostream& ostream, const Plane& plane)
     ostream << plane.a << ' ' << plane.b << ' ' << plane.c << ' ' << plane.d;
     return ostream;
 }
+
+} // namespace math
 
 } // namespace ootz

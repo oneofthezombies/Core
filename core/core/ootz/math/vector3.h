@@ -1,8 +1,9 @@
 #pragma once
 
-#include "ootz/base.h"
-
 namespace ootz
+{
+
+namespace math
 {
 
 struct Vector3
@@ -71,5 +72,7 @@ Vector3 operator/(const Vector3& vector3, const float value);
 // helper functions
 
 std::ostream& operator<<(std::ostream& ostream, const Vector3& vector3);
+
+} // namespace math
 
 } // namespace ootz

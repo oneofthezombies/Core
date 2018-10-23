@@ -1,19 +1,19 @@
 #include "stdafx.h"
-#include "AStar2D.h"
+#include "a_star_2d.h"
 
-/* assert() */
-#include <cassert>
-
-/* ootz::IsOutOfRange() */
+// ootz::IsOutOfRange()
 #include "Utility.h"
 
 namespace ootz
 {
 
-using Vector2 = Math::Vector2;
+namespace pathfinder
+{
 
-Grid2D::Grid2D(const std::size_t numX, const std::size_t numY)
-    : grid_(numY, std::vector<Attribute>(numX, Attribute::Reachable))
+using Vector2 = math::Vector2;
+
+Grid2D::Grid2D(const size_t numX, const size_t numY)
+    : _grid(numY, std::vector<Attribute>(numX, Attribute::Reachable))
 {
 }
 
@@ -21,39 +21,36 @@ Grid2D::~Grid2D()
 {
 }
 
-Attribute& Grid2D::AccessAttribute_(const std::size_t x, const std::size_t y)
+Attribute& Grid2D::accessAttribute(const size_t x, const size_t y)
 {
-    const bool isOutOfRangeRow = IsOutOfRange(grid_, y);
-    assert( ! isOutOfRangeRow && "y is out of range.");
+    assert(false == IsOutOfRange(_grid, y) && "y is out of range.");
+    assert(false == IsOutOfRange(_grid.front(), x) && "x is out of range.");
 
-    const bool isOutOfRangeCol = IsOutOfRange(grid_.front(), x);
-    assert( ! isOutOfRangeCol && "x is out of range.");
+    const size_t row = (_grid.size() - 1) - y;
 
-    const std::size_t row = (grid_.size() - 1) - y;
-
-    return grid_[row][x];
+    return _grid[row][x];
 }
 
-void Grid2D::SetAttribute(const std::size_t x, const std::size_t y, const Attribute attribute)
+void Grid2D::setAttribute(const size_t x, const size_t y, const Attribute attribute)
 {
-    AccessAttribute_(x, y) = attribute;
+    accessAttribute(x, y) = attribute;
 }
 
-Attribute Grid2D::GetAttribute(const std::size_t x, const std::size_t y)
+Attribute Grid2D::getAttribute(const size_t x, const size_t y)
 {
-    return AccessAttribute_(x, y);
+    return accessAttribute(x, y);
 }
 
-std::size_t Grid2D::GetNumX() const
+size_t Grid2D::getNumX() const
 {
-    assert(grid_.size() > 0 && "grid 2d's size is zero.");
+    assert(_grid.size() > 0 && "grid 2d's size is zero.");
 
-    return grid_.front().size();
+    return _grid.front().size();
 }
 
-std::size_t Grid2D::GetNumY() const
+size_t Grid2D::getNumY() const
 {
-    return grid_.size();
+    return _grid.size();
 }
 
 StreamGrid2D::NodeInfo::NodeInfo()
@@ -67,42 +64,45 @@ StreamGrid2D::StreamGrid2D()
 
 StreamGrid2D::StreamGrid2D(Grid2D& grid)
 {
-    Add(grid);
+    add(grid);
 }
 
 StreamGrid2D::~StreamGrid2D()
 {
 }
 
-void StreamGrid2D::Add(const Vector2& position, const NodeInfo& nodeInfo)
+void StreamGrid2D::add(const Vector2& position, const NodeInfo& nodeInfo)
 {
-    stream_grid_.insert_or_assign(position, nodeInfo);
+    _streamGrid.insert_or_assign(position, nodeInfo);
 }
 
-void StreamGrid2D::Add(Grid2D& grid)
+void StreamGrid2D::add(Grid2D& grid)
 {
-    using IntPair = std::pair<int32_t, int32_t>;
+    using std::pair;
+    using std::make_pair;
+
+    using IntPair = pair<int32_t, int32_t>;
 
     const std::vector<IntPair> eightDirections =
     {
-        std::make_pair(0,  1),
-        std::make_pair(1,  1),
-        std::make_pair(1,  0),
-        std::make_pair(1, -1),
-        std::make_pair(0, -1),
-        std::make_pair(-1, -1),
-        std::make_pair(-1,  0),
-        std::make_pair(-1,  1)
+        make_pair(0,  1),
+        make_pair(1,  1),
+        make_pair(1,  0),
+        make_pair(1, -1),
+        make_pair(0, -1),
+        make_pair(-1, -1),
+        make_pair(-1,  0),
+        make_pair(-1,  1)
     };
 
-    const std::size_t ySize = grid.GetNumY();
-    for (std::size_t y = 0; y < ySize; ++y)
+    const size_t ySize = grid.getNumY();
+    for (size_t y = 0; y < ySize; ++y)
     {
-        const std::size_t xSize = grid.GetNumX();
-        for (std::size_t x = 0; x < xSize; ++x)
+        const size_t xSize = grid.getNumX();
+        for (size_t x = 0; x < xSize; ++x)
         {
             NodeInfo nodeInfo;
-            nodeInfo.attribute = grid.GetAttribute(x, y);
+            nodeInfo.attribute = grid.getAttribute(x, y);
 
             // if neighbor is reachable then add to neighbors
             for (const auto& dir : eightDirections)
@@ -110,14 +110,11 @@ void StreamGrid2D::Add(Grid2D& grid)
                 const int32_t nx = x + dir.first;
                 const int32_t ny = y + dir.second;
 
-                const bool isOutOfRangeX = IsOutOfRange(xSize, nx);
-                const bool isOutOfRangeY = IsOutOfRange(ySize, ny);
-
-                if (isOutOfRangeX ||
-                    isOutOfRangeY)
+                if (IsOutOfRange(xSize, nx) ||
+                    IsOutOfRange(ySize, ny))
                     continue;
 
-                if (grid.GetAttribute(nx, ny) == Attribute::Unreachable)
+                if (grid.getAttribute(nx, ny) == Attribute::Unreachable)
                     continue;
 
                 nodeInfo.neighbors.emplace_back(
@@ -125,35 +122,33 @@ void StreamGrid2D::Add(Grid2D& grid)
                             static_cast<float>(ny)));
             }
 
-            Add(Vector2(static_cast<float>(x),
+            add(Vector2(static_cast<float>(x),
                         static_cast<float>(y)),
                 nodeInfo);
         }
     }
 }
 
-const std::vector<Vector2>& StreamGrid2D::GetNeighbors(const Vector2& node) const
+const std::vector<Vector2>& StreamGrid2D::getNeighbors(const Vector2& node) const
 {
-    const auto found = stream_grid_.find(node);
-
-    assert(found != stream_grid_.end() && "node does not exist.");
-
+    const auto found = _streamGrid.find(node);
+    assert(found != _streamGrid.end() && "node does not exist.");
     return found->second.neighbors;
 }
 
-float StreamGrid2D::GetCost(const Vector2& lhs, const Vector2& rhs) const
+float StreamGrid2D::getCost(const Vector2& lhs, const Vector2& rhs) const
 {
     const Vector2 dif = lhs - rhs;
 
     return std::sqrt(dif.x * dif.x + dif.y * dif.y);
 }
 
-float AStar2D::GetHeuristic_(const Vector2& lhs, const Vector2& rhs)
+float AStar2D::getHeuristic(const Vector2& lhs, const Vector2& rhs)
 {
     return std::abs(lhs.x - rhs.x) + std::abs(lhs.y - rhs.y);
 }
 
-std::vector<Vector2> AStar2D::ConstructPath_(HashTable<Vector2>& cameFrom, const Vector2& start, const Vector2& goal)
+std::vector<Vector2> AStar2D::constructPath(HashTable<Vector2>& cameFrom, const Vector2& start, const Vector2& goal)
 {
     Vector2 current = goal;
 
@@ -175,8 +170,8 @@ AStar2D::~AStar2D()
 {
 }
 
-std::vector<Vector2> AStar2D::GetPath(const StreamGrid2D& graph, 
-                                      const Vector2& start, 
+std::vector<Vector2> AStar2D::getPath(const StreamGrid2D& graph,
+                                      const Vector2& start,
                                       const Vector2& goal)
 {
     PriorityQueue frontier;
@@ -186,33 +181,33 @@ std::vector<Vector2> AStar2D::GetPath(const StreamGrid2D& graph,
     HashTable<float> priority;
 
     priority[start] = 0.0f;
-    frontier.Push(start, 0.0f);
+    frontier.push(start, 0.0f);
     costSoFar[start] = 0.0f;
 
-    while ( ! frontier.IsEmpty())
+    while (!frontier.isEmpty())
     {
         // get smallest cost node.
-        const Vector2 current = frontier.Pop().value;
+        const Vector2 current = frontier.pop().value;
 
         // if you reached to goal, construct path.
         if (IsEqual(current, goal))
             break;
 
-        for (const Vector2& next : graph.GetNeighbors(current))
+        for (const Vector2& next : graph.getNeighbors(current))
         {
             // new path
-            const float newCost = costSoFar[current] + graph.GetCost(current, next);
+            const float newCost = costSoFar[current] + graph.getCost(current, next);
 
             const bool isFound = costSoFar.find(next) != costSoFar.end();
 
             // if first visit or new path is better, write(overwrite) it.
-            if ( ! isFound || newCost < costSoFar[next])
+            if (!isFound || newCost < costSoFar[next])
             {
                 costSoFar[next] = newCost;
 
-                const float nextPriority = newCost + GetHeuristic_(goal, next);
+                const float nextPriority = newCost + getHeuristic(goal, next);
                 priority[next] = nextPriority;
-                frontier.Push(next, nextPriority);
+                frontier.push(next, nextPriority);
 
                 // update the path.
                 cameFrom[next] = current;
@@ -222,11 +217,11 @@ std::vector<Vector2> AStar2D::GetPath(const StreamGrid2D& graph,
 
     // if the goal is not reached, return empty vector.
     const bool isFound = cameFrom.find(goal) != cameFrom.end();
-    if ( ! isFound)
+    if (!isFound)
         return std::vector<Vector2>();
 
     // else, construct path.
-    return ConstructPath_(cameFrom, start, goal);
+    return constructPath(cameFrom, start, goal);
 }
 
 AStar2D::PriorityQueue::Element::Element(const Vector2& value, const float priority)
@@ -240,29 +235,29 @@ bool AStar2D::PriorityQueue::Compare::operator()(const Element& lhs, const Eleme
     return lhs.priority > rhs.priority;
 }
 
-void AStar2D::PriorityQueue::Push(const Element& element)
+void AStar2D::PriorityQueue::push(const Element& element)
 {
-    queue_.push(element);
+    _queue.push(element);
 }
 
-void AStar2D::PriorityQueue::Push(const Vector2& value, const float priority)
+void AStar2D::PriorityQueue::push(const Vector2& value, const float priority)
 {
-    Push(Element(value, priority));
+    push(Element(value, priority));
 }
 
-AStar2D::PriorityQueue::Element AStar2D::PriorityQueue::Pop()
+AStar2D::PriorityQueue::Element AStar2D::PriorityQueue::pop()
 {
-    assert(!queue_.empty() && "queue is empty.");
-
-    const Element top = queue_.top();
-    queue_.pop();
-
+    assert(!_queue.empty() && "queue is empty.");
+    const Element top = _queue.top();
+    _queue.pop();
     return top;
 }
 
-bool AStar2D::PriorityQueue::IsEmpty() const
+bool AStar2D::PriorityQueue::isEmpty() const
 {
-    return queue_.empty();
+    return _queue.empty();
 }
+
+} // namespace pathfinder
 
 } // namespace ootz

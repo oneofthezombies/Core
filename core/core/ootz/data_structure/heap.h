@@ -200,4 +200,40 @@ constexpr std::ostream& operator<<(std::ostream& ostream, const Heap<T, Compare>
     return ostream;
 }
 
+template<
+    typename T, 
+    typename Compare = std::less<T>>
+class StdHeap
+{
+public:
+    StdHeap()
+        : _vector()
+    {}
+
+    ~StdHeap() {}
+
+    StdHeap(const std::vector<T>& vector)
+    {
+        _vector = vector;
+        std::make_heap(_vector.begin(), _vector.end(), Compare());
+    }
+
+    constexpr void push(const T& key) const
+    {
+        _vector.push_back(key);
+        std::push_heap(_vector.begin(), _vector.end(), Compare());
+    }
+
+    constexpr T pop() const
+    {
+        std::pop_heap(_vector.begin(), _vector.end(), Compare());
+        const T back = _vector.back();
+        _vector.pop_back();
+        return back;
+    }
+
+private:
+    std::vector<T> _vector;
+};
+
 } // namespace ootz

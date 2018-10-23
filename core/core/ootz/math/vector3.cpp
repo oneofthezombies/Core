@@ -7,6 +7,9 @@
 namespace ootz
 {
 
+namespace math
+{
+
 Vector3::Vector3()
     : x(0.0f)
     , y(0.0f)
@@ -47,16 +50,16 @@ float Vector3::Length() const
 
 float Vector3::Dot(const Vector3& v0, const Vector3& v1)
 {
-    return v0.x * v1.x 
-         + v0.y * v1.y 
-         + v0.z * v1.z;
+    return v0.x * v1.x
+        + v0.y * v1.y
+        + v0.z * v1.z;
 }
 
 Vector3 Vector3::Cross(const Vector3& v0, const Vector3& v1)
 {
-    return Vector3(  v0.y * v1.z - v0.z * v1.y, 
-                   -(v0.x * v1.z - v0.z * v1.x), 
-                     v0.x * v1.y - v0.y * v1.x);
+    return Vector3(v0.y * v1.z - v0.z * v1.y,
+                   -(v0.x * v1.z - v0.z * v1.x),
+                   v0.x * v1.y - v0.y * v1.x);
 }
 
 Vector3 Vector3::Normalize(const Vector3& vector3)
@@ -72,8 +75,8 @@ float Vector3::Length(const Vector3& vector3)
 float Vector3::LengthSq(const Vector3& vector3)
 {
     return vector3.x * vector3.x
-         + vector3.y * vector3.y
-         + vector3.z + vector3.z;
+        + vector3.y * vector3.y
+        + vector3.z + vector3.z;
 }
 
 Vector3 operator+(const Vector3& v0, const Vector3& v1)
@@ -90,8 +93,8 @@ Vector3 operator/(const Vector3& vector3, const float value)
 {
     assert(value && "divided by zero.");
 
-    return Vector3(vector3.x / value, 
-                   vector3.y / value, 
+    return Vector3(vector3.x / value,
+                   vector3.y / value,
                    vector3.z / value);
 }
 
@@ -109,6 +112,8 @@ size_t Vector3::Hash::operator()(const Vector3& key) const
     boost::hash_combine(seed, key.z);
     return seed;
 }
+
+} // namespace math
 
 } // namespace ootz
 

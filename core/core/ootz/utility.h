@@ -5,12 +5,21 @@
 namespace ootz
 {
 
-template<typename T>
-bool IsOutOfRange(const std::vector<T>& vector, const std::size_t index)
+constexpr bool IsOutOfRange(const size_t size, const size_t index)
 {
-    return index >= vector.size();
+    return index >= size;
 }
 
-bool IsOutOfRange(const std::size_t size, const int32_t index);
+template<typename T>
+constexpr bool IsOutOfRange(const std::vector<T>& vector, const size_t index)
+{
+    return IsOutOfRange(vector.size(), index);
+}
+
+template<typename T>
+constexpr bool IsValidIndex(const std::vector<T>& vector, const size_t index)
+{
+    return false == IsOutOfRange(vector.size(), index);
+}
 
 } // namespace ootz

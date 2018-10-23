@@ -1,34 +1,14 @@
 #pragma once
 
-#include "ootz/DirectX9/Definition.h"
+#include "ootz/directx9/base.h"
 
 namespace ootz
 {
 
-namespace DirectX9
+namespace directx9
 {
 
 
-
-//struct Shader
-//{
-//    class Manager : public Singleton<Manager>
-//    {
-//    private:
-//        EffectPtr  pCreateShadow;
-//        TexturePtr pShadowRenderTarget;
-//        SurfacePtr pShadowDepthStencil;
-//
-//        Manager(Token);
-//        virtual ~Manager();
-//
-//    public:
-//        void Init();
-//        void Destroy();
-//    };
-//
-//    Shader() = delete;
-//};
 
 } // namespace directx9
 

@@ -1,9 +1,11 @@
 #pragma once
 
-#include "ootz/base.h"
 #include "ootz/math/vector3.h"
 
 namespace ootz
+{
+
+namespace math
 {
 
 // coefficients of the plane equation, ax + by + cz + d = 0
@@ -54,5 +56,7 @@ private:
 // helper functions
 
 std::ostream& operator<<(std::ostream& ostream, const Plane& plane);
+
+} // namespace math
 
 } // namespace ootz

@@ -7,6 +7,9 @@
 namespace ootz
 {
 
+namespace math
+{
+
 Vector2::Vector2()
     : x(0.0f)
     , y(0.0f)
@@ -124,5 +127,7 @@ size_t Vector2::Hash::operator()(const Vector2& key) const
 
     return seed;
 }
+
+} // namespace math
 
 } // namespace ootz

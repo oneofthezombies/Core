@@ -1,14 +1,11 @@
 #pragma once
 
-/* std::unique_ptr */
-#include <memory>
-
 #include <d3dx9.h>
 
 namespace ootz
 {
 
-namespace DirectX9
+namespace directx9
 {
 
 using EffectPtr = std::unique_ptr<ID3DXEffect>;

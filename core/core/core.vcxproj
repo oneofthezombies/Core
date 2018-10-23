@@ -168,13 +168,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ootz.h" />
     <ClInclude Include="ootz\a_star_2d.h" />
     <ClInclude Include="ootz\base.h" />
     <ClInclude Include="ootz\data_structure.h" />
     <ClInclude Include="ootz\diamond\example.h" />
     <ClInclude Include="ootz\data_structure\heap.h" />
     <ClInclude Include="ootz\directx11\directx11.h" />
-    <ClInclude Include="ootz\directx9\definition.h" />
+    <ClInclude Include="ootz\directx9\base.h" />
     <ClInclude Include="ootz\directx9\shader.h" />
     <ClInclude Include="ootz\math.h" />
     <ClInclude Include="ootz\math\plane.h" />
@@ -193,8 +194,6 @@
     <ClCompile Include="ootz\math\plane.cpp" />
     <ClCompile Include="ootz\math\vector2.cpp" />
     <ClCompile Include="ootz\math\vector3.cpp" />
-    <ClCompile Include="ootz\time.cpp" />
-    <ClCompile Include="ootz\utility.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

@@ -1,8 +1,9 @@
 #pragma once
 
-#include "ootz/base.h"
-
 namespace ootz
+{
+
+namespace math
 {
 
 // Vector2 contains two float value
@@ -56,5 +57,7 @@ Vector2 operator/(const float lhs, const Vector2& rhs);
 
 std::ostream& operator<<(std::ostream& ostream, const Vector2& value);
 bool IsEqual(const Vector2& lhs, const Vector2& rhs, const float epsilon = std::numeric_limits<float>::epsilon());
+
+} // namespace math
 
 } // namespace ootz
